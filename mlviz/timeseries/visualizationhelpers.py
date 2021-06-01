@@ -63,7 +63,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
 
     # Create the figure and the axes
     fig, ax = plt.subplots(
-        figsize=gph.GraphicsStatics.g_landscape_fig_size)
+        figsize=gph.GraphicsStatics.get_landscape_fig_size())
 
     
     min_values = []
@@ -366,7 +366,7 @@ def plot_heatmap(data, title=None, subtitle=None, name=None, cbar_label='traffic
 
     # Create the figure and the axes
     fig, ax = plt.subplots(
-        figsize=gph.GraphicsStatics.g_landscape_fig_size)
+        figsize=gph.GraphicsStatics.get_landscape_fig_size())
 
     sns.heatmap(
         data=data, 
@@ -411,7 +411,7 @@ def plot_seasonal_decomposition(data, title=None, subtitle=None, name=None, peri
     # Create the figure and the axes
     fig, ax = plt.subplots(
         4, 1,
-        figsize=gph.GraphicsStatics.g_square_fig_size)
+        figsize=gph.GraphicsStatics.get_square_fig_size())
 
     # Observed time series.
     decomposition_obj.observed.plot(
@@ -476,7 +476,7 @@ def plot_autocorrelation(data, title=None, subtitle=None, name=None, lags=None, 
     # Create the figure and the axes
     fig, ax = plt.subplots(
         2, 1,
-        figsize=gph.GraphicsStatics.g_square_fig_size)
+        figsize=gph.GraphicsStatics.get_square_fig_size())
 
     plot_acf(
         x=data,
@@ -512,7 +512,7 @@ def plot_time_series_dist(data, title=None, subtitle=None, name=None, bins=15, e
 
     # Create the figure and the axes
     fig, ax = plt.subplots(
-        figsize=gph.GraphicsStatics.g_landscape_fig_size)
+        figsize=gph.GraphicsStatics.get_landscape_fig_size())
     
     data_mean = data.mean()
     data_std = data.std()
@@ -570,7 +570,7 @@ def plot_regression_comparison(title=None, subtitle=None, name=None,
 
     # Create the figure and the axes
     fig, ax = plt.subplots(
-        figsize=gph.GraphicsStatics.g_landscape_fig_size)
+        figsize=gph.GraphicsStatics.get_landscape_fig_size())
 
     if actual_train is not None or actual_test is not None:
         

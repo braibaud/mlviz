@@ -13,11 +13,7 @@ class GraphicsStatics(object):
     g_hatch = ['/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*']
     g_linestyle = ['-', '--', '-.', ':']
 
-    g_fig_size_base = 6
-    g_landscape_fig_size = (2*g_fig_size_base, g_fig_size_base)
-    g_square_fig_size = (2*g_fig_size_base, 2*g_fig_size_base)
-    g_portrait_fig_size = (2*g_fig_size_base, 3*g_fig_size_base)
-
+    g_fig_size_base = 10
     g_styles_initialized = False
 
     @staticmethod
@@ -35,12 +31,30 @@ class GraphicsStatics(object):
             sns.set_palette(
                 GraphicsStatics.g_palette)
 
-            pyl.rcParams['figure.figsize'] = GraphicsStatics.g_landscape_fig_size
-            plt.rcParams['figure.figsize'] = GraphicsStatics.g_landscape_fig_size
-            plt.rcParams['axes.labelsize'] = 18
-            plt.rcParams['axes.titlesize'] = 18
+            pyl.rcParams['figure.figsize'] = GraphicsStatics.get_landscape_fig_size()
+            plt.rcParams['figure.figsize'] = GraphicsStatics.get_landscape_fig_size()
+            plt.rcParams['axes.labelsize'] = 2*GraphicsStatics.g_fig_size_base
+            plt.rcParams['axes.titlesize'] = 2*GraphicsStatics.g_fig_size_base
 
             GraphicsStatics.g_styles_initialized = True
+
+    @staticmethod
+    def set_fig_size_base(value):
+        GraphicsStatics.g_fig_size_base = value
+        GraphicsStatics.g_styles_initialized = False
+        GraphicsStatics.initialize_matplotlib_styles()
+
+    @staticmethod
+    def get_landscape_fig_size():
+        return (2*GraphicsStatics.g_fig_size_base, GraphicsStatics.g_fig_size_base)
+
+    @staticmethod
+    def get_square_fig_size():
+        return (2*GraphicsStatics.g_fig_size_base, 2*GraphicsStatics.g_fig_size_base)
+
+    @staticmethod
+    def get_portrait_fig_size():
+        return (GraphicsStatics.g_fig_size_base, 2*GraphicsStatics.g_fig_size_base)
 
     @staticmethod
     def get_color(index):
