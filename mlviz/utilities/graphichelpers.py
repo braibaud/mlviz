@@ -13,9 +13,10 @@ class GraphicsStatics(object):
     g_hatch = ['/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*']
     g_linestyle = ['-', '--', '-.', ':']
 
-    g_landscape_fig_size = (20, 10)
-    g_square_fig_size = (20, 20)
-    g_portrait_fig_size = (20, 30)
+    g_fig_size_base = 6
+    g_landscape_fig_size = (2*g_fig_size_base, g_fig_size_base)
+    g_square_fig_size = (2*g_fig_size_base, 2*g_fig_size_base)
+    g_portrait_fig_size = (2*g_fig_size_base, 3*g_fig_size_base)
 
     g_styles_initialized = False
 
