@@ -49,6 +49,9 @@ def plot_time_series(title=None, subtitle=None, name=None,
     split=None,
     split_label='Train/test split',
     
+    date_col='ds',
+    xlabel='date', 
+    ylabel='traffic',
     window_size=None,
     include_zero=True,
     experiment_manager=None, 
@@ -89,7 +92,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i_con, con in enumerate(confidence):
 
             ax.fill_between(
-                x=con['ds'],
+                x=con[date_col],
                 y1=con[confidence_lower_col[i_con]],
                 y2=con[confidence_upper_col[i_con]],
                 color=gph.GraphicsStatics.get_color(6), 
@@ -98,7 +101,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
                 label=confidence_label[i_con])
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=confidence_lower_col[i_con],
                 label=None,
                 color=gph.GraphicsStatics.get_color(6), 
@@ -109,7 +112,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
                 ax=ax)
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=confidence_upper_col[i_con],
                 label=None,
                 color=gph.GraphicsStatics.get_color(6), 
@@ -125,7 +128,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
             min_values.append(con[confidence_upper_col[i_con]].min())
             max_values.append(con[confidence_upper_col[i_con]].max())
 
-            max_date = con['ds'].max()
+            max_date = con[date_col].max()
 
         
     ##### RESIDUAL #####
@@ -143,7 +146,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i_res, res in enumerate(residual):
             
             ax.fill_between(
-                x=res['ds'], 
+                x=res[date_col], 
                 y1=0,
                 y2=res[residual_col[i_res]], 
                 color=gph.GraphicsStatics.get_color(4),
@@ -152,7 +155,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
                 label=residual_label[i_res])
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=residual_col[i_res],
                 label=None,
                 color=gph.GraphicsStatics.get_color(4), 
@@ -168,7 +171,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
             min_values.append(res[residual_col[i_res]].min())
             max_values.append(res[residual_col[i_res]].max())
 
-            max_date = res['ds'].max()
+            max_date = res[date_col].max()
         
 
     ##### TRAINING #####
@@ -186,7 +189,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i_tra, tra in enumerate(training):
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=training_col[i_tra],
                 label=training_label[i_tra],
                 color=gph.GraphicsStatics.get_color(0), 
@@ -197,7 +200,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
             min_values.append(tra[training_col[i_tra]].min())
             max_values.append(tra[training_col[i_tra]].max())
 
-            max_date = tra['ds'].max()
+            max_date = tra[date_col].max()
 
             
     ##### TESTING #####
@@ -215,7 +218,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i_tes, tes in enumerate(testing):
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=testing_col[i_tes],
                 label=testing_label[i_tes],
                 color=gph.GraphicsStatics.get_color(1), 
@@ -226,7 +229,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
             min_values.append(tes[testing_col[i_tes]].min())
             max_values.append(tes[testing_col[i_tes]].max())
 
-            max_date = tes['ds'].max()
+            max_date = tes[date_col].max()
 
             
     ##### PREDICTION #####
@@ -244,7 +247,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i_pre, pre in enumerate(prediction):
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=prediction_col[i_pre],
                 label=prediction_label[i_pre],
                 color=gph.GraphicsStatics.get_color(2), 
@@ -255,7 +258,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
             min_values.append(pre[prediction_col[i_pre]].min())
             max_values.append(pre[prediction_col[i_pre]].max())
 
-            max_date = pre['ds'].max()
+            max_date = pre[date_col].max()
 
             
     ##### TREND #####
@@ -273,7 +276,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i_tre, tre in enumerate(trend):
 
             sns.lineplot(
-                x='ds',
+                x=date_col,
                 y=trend_col[i_tre],
                 label=trend_label[i_tre],
                 color=gph.GraphicsStatics.get_color(7), 
@@ -284,7 +287,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
             min_values.append(tre[trend_col[i_tre]].min())
             max_values.append(tre[trend_col[i_tre]].max())
 
-            max_date = tre['ds'].max()
+            max_date = tre[date_col].max()
 
             
     ##### SPLIT #####
@@ -312,7 +315,7 @@ def plot_time_series(title=None, subtitle=None, name=None,
         for i, (tr, te, pr) in enumerate(zip(training, testing, prediction)):
 
             ax.fill_between(
-                x=pd.concat([tr, te])['ds'], 
+                x=pd.concat([tr, te])[date_col], 
                 y1=pd.concat([tr[training_col[i]], te[testing_col[i]]]),
                 y2=pr[prediction_col[i]], 
                 color=gph.GraphicsStatics.get_color(7),
@@ -340,8 +343,8 @@ def plot_time_series(title=None, subtitle=None, name=None,
         loc='upper right')
 
     ax.set(
-        xlabel='date', 
-        ylabel='traffic')
+        xlabel=xlabel, 
+        ylabel=ylabel)
 
     gph.GraphicsStatics.style_plot(
         title=title, 

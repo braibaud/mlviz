@@ -9,7 +9,7 @@ mlviz is compatible with Python 3.6 and is distributed under the MIT license.
 
 setup(
     name='mlviz',
-    version='0.1.1',
+    version='0.1.2',
     description='mlviz is a visualization and graphics helpers for common machine learning work',
     long_description=long_description,
     author='Benjamin Raibaud',
